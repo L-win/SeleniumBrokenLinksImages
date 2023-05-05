@@ -15,12 +15,10 @@ public class Main {
 		System.setProperty("webdriver.edge.driver", PATH_EDGE);
 		System.setProperty("webdriver.firefox.driver", PATH_FIREFOX);
 
-		System.out.println("[START TEST]");
-
 		driver = new ChromeDriver();
 
 		BrokenLinks.findLinks(driver);
-//		BrokenLinks.findOneLink(driver);
+		BrokenLinks.verifyLinks(driver);
 
 	}
 }
