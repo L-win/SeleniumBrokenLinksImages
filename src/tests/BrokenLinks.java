@@ -22,11 +22,9 @@ public class BrokenLinks {
 				allLinks.add(el.getAttribute("href"));
 			}
 			Thread.sleep(3000);
-		}
-		catch(Exception e){
+		} catch(Exception e){
 			System.out.println("[ERROR]\n" + e.getMessage());
-		}
-		finally{
+		} finally{
 			driver.close();
 			driver.quit();
 		}
@@ -39,24 +37,19 @@ public class BrokenLinks {
 			for (String link: allLinks){
 				URL url = new URL(link);
 				con = (HttpURLConnection) url.openConnection();
-
 				con.setConnectTimeout(5000);
 				con.connect();
-
 				if (con.getResponseCode() >= 400){
 					System.out.println(link + " - " + con.getResponseMessage() + "is a broken link");
-				}
-				else{
+				} else{
 					System.out.println(con.getResponseMessage() + " " + link);
 				}
 				Thread.sleep(1000);
 			}
-		}
-		catch(Exception e){
+		} catch(Exception e){
 			System.out.println("[ERROR] Unknown lik: " + e.getMessage());
 			e.printStackTrace();
-		}
-		finally{
+		} finally{
 			if (con != null) con.disconnect();
 			driver.quit();
 		}
@@ -92,5 +85,4 @@ public class BrokenLinks {
 			System.out.println("[TEST STOP]");
 		}
 	}
-
 }
