@@ -1,3 +1,5 @@
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import tests.BrokenLinks;
@@ -15,10 +17,15 @@ public class Main {
 		System.setProperty("webdriver.edge.driver", PATH_EDGE);
 		System.setProperty("webdriver.firefox.driver", PATH_FIREFOX);
 
-		driver = new ChromeDriver();
+		String host = "https://www.google.com";
 
-		BrokenLinks.findLinks(driver);
-		BrokenLinks.verifyLinks(driver);
+		driver = new ChromeDriver();
+		driver.manage().window().setPosition(new Point(500, 0));
+		driver.manage().window().setSize(new Dimension(800, 600));
+
+		BrokenLinks.findAllLinks(driver,host);
+		BrokenLinks.verifyAllLinks(driver);
+
 
 	}
 }
