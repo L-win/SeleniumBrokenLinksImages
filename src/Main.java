@@ -23,8 +23,10 @@ public class Main {
 		driver.manage().window().setPosition(new Point(500, 0));
 		driver.manage().window().setSize(new Dimension(800, 600));
 
+		System.out.println("[start test]");
 		// BrokenLinks.findAllLinks(driver,host);
 		// BrokenLinks.verifyAllLinks(driver);
-		BrokenImages.gatherImageLinks(driver,host);
+		BrokenImages.findImageLinks(driver,host);
+		System.out.println("[end test]");
 	}
 }
