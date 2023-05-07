@@ -18,6 +18,7 @@ public class Main {
 		System.setProperty("webdriver.firefox.driver", PATH_FIREFOX);
 
 		String host = "https://en.wikipedia.org/wiki/Main_Page";
+		// String host = "https://google.com";
 
 		driver = new ChromeDriver();
 		driver.manage().window().setPosition(new Point(500, 0));

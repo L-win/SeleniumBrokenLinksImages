@@ -14,7 +14,7 @@ public class BrokenLinks {
 
 	public static void findAllLinks(WebDriver driver, String host){
 		System.out.println("Gathering links...");
-		try{
+		try {
 			driver.get(host);
 			List<WebElement> allLinksTemp = driver.findElements(By.tagName("a"));
 			System.out.println("Found " + allLinksTemp.size() + " links.");
