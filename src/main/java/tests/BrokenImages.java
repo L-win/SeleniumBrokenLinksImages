@@ -32,9 +32,9 @@ public class BrokenImages{
 			Thread.sleep(4000);
 		} catch(Exception e) {
 			System.out.println("[ERROR]\n" + e.getMessage());
-		} finally{
+		} finally {
 			driver.close();
-			driver.quit();
+//			driver.quit();
 		}
 	}
 

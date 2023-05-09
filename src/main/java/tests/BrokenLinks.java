@@ -22,18 +22,18 @@ public class BrokenLinks {
 				allLinks.add(el.getAttribute("href"));
 			}
 			Thread.sleep(3000);
-		} catch(Exception e){
+			verifyAllLinks();
+		} catch(Exception e) {
 			System.out.println("[ERROR]\n" + e.getMessage());
-		} finally{
+		} finally {
 			driver.close();
-			driver.quit();
 		}
 	}
 
-	public static void verifyAllLinks(WebDriver driver){
+	private static void verifyAllLinks(){
 		HttpURLConnection con = null;
 		System.out.println("Verifying "+allLinks.size()+" links...");
-		try{
+		try {
 			for (String link: allLinks){
 				URL url = new URL(link);
 				con = (HttpURLConnection) url.openConnection();
@@ -46,12 +46,11 @@ public class BrokenLinks {
 				}
 				Thread.sleep(1000);
 			}
-		} catch(Exception e){
+		} catch(Exception e) {
 			System.out.println("[ERROR] Unknown lik: " + e.getMessage());
 			e.printStackTrace();
-		} finally{
+		} finally {
 			if (con != null) con.disconnect();
-			driver.quit();
 		}
 	}
 
