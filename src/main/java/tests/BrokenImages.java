@@ -34,7 +34,6 @@ public class BrokenImages{
 			System.out.println("[ERROR]\n" + e.getMessage());
 		} finally {
 			driver.close();
-//			driver.quit();
 		}
 	}
 
@@ -45,7 +44,7 @@ public class BrokenImages{
 			HttpURLConnection httpURLConnect=(HttpURLConnection)url.openConnection();
 			httpURLConnect.setConnectTimeout(5000);
 			httpURLConnect.connect();
-			if (httpURLConnect.getResponseCode()>=400) result = false;
+			if (httpURLConnect.getResponseCode() >= 400) result = false;
 			else result = true;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

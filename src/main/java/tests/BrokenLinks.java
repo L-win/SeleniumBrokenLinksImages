@@ -22,10 +22,11 @@ public class BrokenLinks {
 				allLinks.add(el.getAttribute("href"));
 			}
 			Thread.sleep(3000);
+			// Return true or falls (assert)
 			verifyAllLinks();
 		} catch(Exception e) {
 			System.out.println("[ERROR]\n" + e.getMessage());
-		} finally {
+		} finally { s
 			driver.close();
 		}
 	}
@@ -40,8 +41,9 @@ public class BrokenLinks {
 				con.setConnectTimeout(5000);
 				con.connect();
 				if (con.getResponseCode() >= 400){
+					//Return false, exit
 					System.out.println(link + " - " + con.getResponseMessage() + "is a broken link");
-				} else{
+				} else {
 					System.out.println(con.getResponseMessage() + " " + link);
 				}
 				Thread.sleep(1000);
@@ -54,34 +56,4 @@ public class BrokenLinks {
 		}
 	}
 
-	public static void findOneLink(WebDriver driver){
-		driver.get("https://www.google.com");
-		List<WebElement> allLinksTemp = driver.findElements(By.tagName("a"));
-		System.out.println(allLinksTemp.get(0).getAttribute("href"));
-		System.out.println(allLinksTemp.get(1).getAttribute("href"));
-		System.out.println(allLinksTemp.get(3).getAttribute("href"));
-	}
-
-	public static void verifyOneLink(WebDriver driver,String link){
-		HttpURLConnection con = null;
-		try{
-			URL url = new URL(link);
-			con = (HttpURLConnection) url.openConnection();
-			con.setConnectTimeout(5000);
-			con.connect();
-			if (con.getResponseCode() >= 400){
-				System.out.println(link + " - " + con.getResponseMessage() + "is a broken link");
-			} else {
-				System.out.println(link + " - " + con.getResponseMessage());
-			}
-			Thread.sleep(1000);
-		} catch(Exception e){
-			System.out.println("[ERROR] Unknown lik: " + e.getMessage());
-			e.printStackTrace();
-		} finally{
-			if (con != null) con.disconnect();
-			driver.quit();
-			System.out.println("[TEST STOP]");
-		}
-	}
 }
