@@ -5,7 +5,6 @@ import org.openqa.selenium.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class BrokenLinks {
@@ -26,7 +25,7 @@ public class BrokenLinks {
 			verifyAllLinks();
 		} catch(Exception e) {
 			System.out.println("[ERROR]\n" + e.getMessage());
-		} finally { s
+		} finally {
 			driver.close();
 		}
 	}
