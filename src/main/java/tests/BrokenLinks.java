@@ -11,26 +11,27 @@ public class BrokenLinks {
 
 	public static ArrayList<String> allLinks = new ArrayList<>();
 
-	public static void findAllLinks(WebDriver driver, String host){
+	public static Boolean findAllLinks(WebDriver driver, String host){
+		Boolean result = true;
 		System.out.println("Gathering links...");
 		try {
 			driver.get(host);
 			List<WebElement> allLinksTemp = driver.findElements(By.tagName("a"));
 			System.out.println("Found " + allLinksTemp.size() + " links.");
-			for (WebElement el: allLinksTemp){
-				allLinks.add(el.getAttribute("href"));
-			}
+			for (WebElement el: allLinksTemp) allLinks.add(el.getAttribute("href"));
 			Thread.sleep(3000);
 			// Return true or falls (assert)
-			verifyAllLinks();
+			result = verifyAllLinks();
 		} catch(Exception e) {
 			System.out.println("[ERROR]\n" + e.getMessage());
 		} finally {
 			driver.close();
 		}
+		return result;
 	}
 
-	private static void verifyAllLinks(){
+	private static Boolean verifyAllLinks(){
+		Boolean result = true;
 		HttpURLConnection con = null;
 		System.out.println("Verifying "+allLinks.size()+" links...");
 		try {
@@ -40,8 +41,9 @@ public class BrokenLinks {
 				con.setConnectTimeout(5000);
 				con.connect();
 				if (con.getResponseCode() >= 400){
-					//Return false, exit
+					result = false;
 					System.out.println(link + " - " + con.getResponseMessage() + "is a broken link");
+					break;
 				} else {
 					System.out.println(con.getResponseMessage() + " " + link);
 				}
@@ -53,6 +55,7 @@ public class BrokenLinks {
 		} finally {
 			if (con != null) con.disconnect();
 		}
+		return result;
 	}
 
 }

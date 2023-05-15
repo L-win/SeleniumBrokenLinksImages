@@ -30,4 +30,4 @@ bin/
 
 .idea/workspace.xml
 todo.txt
-target/
+target/*
